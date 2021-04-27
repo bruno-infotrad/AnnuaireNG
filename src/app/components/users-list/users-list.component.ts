@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { OrgService } from 'src/app/services/org.service';
+import { Org } from '../../models/org.model';
 
 @Component({
   selector: 'app-users-list',
@@ -9,14 +11,16 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UsersListComponent implements OnInit {
   user?: User[];
+  org: Org[] = [];
   currentUser?: User;
   currentIndex = -1;
   username = '';
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private orgService: OrgService) { }
 
   ngOnInit(): void {
     this.retrieveUsers();
+    this.retrieveOrgs();
   }
 
   retrieveUsers(): void {
@@ -62,7 +66,20 @@ export class UsersListComponent implements OnInit {
       .subscribe(
         data => {
           this.user = data;
+
           console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  retrieveOrgs(): void {
+    this.orgService.getAll()
+      .subscribe(
+        data=> {
+          this.org = data;
+          console.log(this.org);
         },
         error => {
           console.log(error);

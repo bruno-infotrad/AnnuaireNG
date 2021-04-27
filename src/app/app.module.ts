@@ -8,13 +8,19 @@ import { AppComponent } from './app.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
+import { OrgDetailsComponent } from './components/org-details/org-details.component';
+import { OrgsListComponent } from './components/orgs-list/orgs-list.component';
+import { AddOrgComponent } from './components/add-org/add-org.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserDetailsComponent,
     UsersListComponent,
-    AddUserComponent
+    AddUserComponent,
+    OrgDetailsComponent,
+    OrgsListComponent,
+    AddOrgComponent
   ],
   imports: [
     BrowserModule,

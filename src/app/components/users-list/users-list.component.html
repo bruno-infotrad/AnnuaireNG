@@ -54,6 +54,12 @@
         <label><strong>Description:</strong></label>
         {{ currentUser.description }}
       </div>
+      <div *ngIf="currentUser.organization">
+        <label><strong>Organization ID:</strong></label>
+        {{ currentUser.organization}}
+        <label><strong>Organization:</strong></label>
+        {{ org[currentUser.organization-1].orgid }}
+      </div>
       <div>
         <label><strong>Status:</strong></label>
         {{ currentUser.published ? "Published" : "Pending" }}

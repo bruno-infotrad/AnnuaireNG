@@ -5,5 +5,6 @@ export class User {
   lastname?: string;
   title?: string;
   description?: string;
+  organization?: number;
   published?: boolean;
 }

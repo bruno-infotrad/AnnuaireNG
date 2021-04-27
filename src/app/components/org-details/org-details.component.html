@@ -1,0 +1,55 @@
+<div>
+  <div *ngIf="currentOrg.id" class="edit-form">
+    <h4>Org</h4>
+    <form>
+      <div class="form-group">
+        <label for="orgid">Organization Acronym</label>
+        <input
+          type="text"
+          class="form-control"
+          id="orgid"
+          [(ngModel)]="currentOrg.orgid"
+          name="orgid"
+        />
+      </div>
+      <div class="form-group">
+        <label for="orgname">Org Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="orgname"
+          [(ngModel)]="currentOrg.orgname"
+          name="orgname"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="currentOrg.description"
+          name="description"
+        />
+      </div>
+    </form>
+
+    <button class="badge badge-danger mr-2" (click)="deleteOrg()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updateOrg()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentOrg.id">
+    <br />
+    <p>Cannot access this Organization...</p>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by organization name"
+        [(ngModel)]="orgname"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchOrgname()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Organization List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let org of org; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveOrg(org, i)"
+      >
+        {{ org.orgname }}
+      </li>
+    </ul>
+
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllOrgs()">
+      Remove All Organizations
+    </button>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentOrg">
+      <h4>Organization</h4>
+      <div>
+        <label><strong>Organization Id:</strong></label> {{ currentOrg.orgid }}
+      </div>
+      <div>
+        <label><strong>Organization Name:</strong></label> {{ currentOrg.orgname }}
+      </div>
+      <div>
+        <label><strong>Description:</strong></label>
+        {{ currentOrg.description }}
+      </div>
+
+      <a class="badge badge-warning" routerLink="/orgs/{{ currentOrg.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentOrg">
+      <br />
+      <p>Please click on an organization...</p>
+    </div>
+  </div>
+</div>

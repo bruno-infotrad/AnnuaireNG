@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { OrgService } from 'src/app/services/org.service';
+import { Org } from '../../models/org.model';
 
 @Component({
   selector: 'app-add-user',
@@ -16,11 +18,13 @@ export class AddUserComponent implements OnInit {
     description: '',
     published: false
   };
+  org: Org[] = [];
   submitted = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private orgService: OrgService) { }
 
   ngOnInit(): void {
+  this.retrieveOrgs();
   }
 
   saveUser(): void {
@@ -29,7 +33,8 @@ export class AddUserComponent implements OnInit {
       firstname: this.user.firstname,
       lastname: this.user.lastname,
       title: this.user.title,
-      description: this.user.description
+      description: this.user.description,
+      organization: this.user.organization
     };
 
     this.userService.create(data)
@@ -53,6 +58,18 @@ export class AddUserComponent implements OnInit {
       description: '',
       published: false
     };
+  }
+
+  retrieveOrgs(): void {
+    this.orgService.getAll()
+      .subscribe(
+        data=> {
+          this.org = data;
+          console.log(this.org);
+        },
+        error => {
+          console.log(error);
+        });
   }
 
 }

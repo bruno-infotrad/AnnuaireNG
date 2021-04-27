@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
+import { OrgService } from 'src/app/services/org.service';
+import { Org } from '../../models/org.model';
 
 @Component({
   selector: 'app-user-details',
@@ -14,15 +16,18 @@ export class UserDetailsComponent implements OnInit {
     description: '',
     published: false
   };
+  org: Org[] = [];
   message = '';
 
   constructor(
     private userService: UserService,
+    private orgService: OrgService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit(): void {
     this.message = '';
+    this.retrieveOrgs();
     this.getUser(this.route.snapshot.params.id);
   }
 
@@ -45,6 +50,7 @@ export class UserDetailsComponent implements OnInit {
       lastname: this.currentUser.lastname,
       title: this.currentUser.title,
       description: this.currentUser.description,
+      organization: this.currentUser.organization,
       published: status
     };
 
@@ -82,6 +88,18 @@ export class UserDetailsComponent implements OnInit {
         response => {
           console.log(response);
           this.router.navigate(['/users']);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  retrieveOrgs(): void {
+    this.orgService.getAll()
+      .subscribe(
+        data=> {
+          this.org = data;
+          console.log(this.org);
         },
         error => {
           console.log(error);
