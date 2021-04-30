@@ -11,6 +11,15 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { OrgDetailsComponent } from './components/org-details/org-details.component';
 import { OrgsListComponent } from './components/orgs-list/orgs-list.component';
 import { AddOrgComponent } from './components/add-org/add-org.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { BoardAdminComponent } from './components/board-admin/board-admin.component';
+import { BoardModeratorComponent } from './components/board-moderator/board-moderator.component';
+import { BoardUserComponent } from './components/board-user/board-user.component';
+
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,7 +29,14 @@ import { AddOrgComponent } from './components/add-org/add-org.component';
     AddUserComponent,
     OrgDetailsComponent,
     OrgsListComponent,
-    AddOrgComponent
+    AddOrgComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
+    BoardAdminComponent,
+    BoardModeratorComponent,
+    BoardUserComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +44,7 @@ import { AddOrgComponent } from './components/add-org/add-org.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,24 +1,41 @@
-<div>
+<div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">INFO-trad</a>
-    <div class="navbar-nav mr-auto">
+    <a href="#" class="navbar-brand">bezKoder</a>
+    <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a routerLink="users" class="nav-link">New TeamInfo</a>
+        <a href="/home" class="nav-link" routerLink="home">Home </a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+      </li>
+      <li class="nav-item" *ngIf="showModeratorBoard">
+        <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
       </li>
       <li class="nav-item">
-        <a routerLink="adduser" class="nav-link">Add a new user</a>
+        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
       </li>
       <li class="nav-item">
-        <a routerLink="orgs" class="nav-link">Organizations</a>
+        <a href="/login" class="nav-link" routerLink="login">Login</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
       </li>
       <li class="nav-item">
-        <a routerLink="addorg" class="nav-link">Add a new organization</a>
+        <a href class="nav-link" (click)="logout()">LogOut</a>
       </li>
-    </div>
+    </ul>
   </nav>
 
-  <div class="container mt-3">
+  <div class="container">
     <router-outlet></router-outlet>
   </div>
 </div>
-
