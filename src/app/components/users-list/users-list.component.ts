@@ -3,6 +3,7 @@ import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { OrgService } from 'src/app/services/org.service';
 import { Org } from '../../models/org.model';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-users-list',
@@ -15,10 +16,22 @@ export class UsersListComponent implements OnInit {
   currentUser?: User;
   currentIndex = -1;
   username = '';
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showEdit = false;
+  appusername?: string;
 
-  constructor(private userService: UserService, private orgService: OrgService) { }
+  constructor(private userService: UserService, private orgService: OrgService,private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const appuser = this.tokenStorageService.getAppuser();
+      this.roles = appuser.roles;
+      this.showEdit = this.roles.includes('ROLE_ADMIN');
+      this.appusername = appuser.username;
+    }
     this.retrieveUsers();
     this.retrieveOrgs();
   }

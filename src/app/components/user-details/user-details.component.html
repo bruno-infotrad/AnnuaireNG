@@ -1,5 +1,5 @@
 <div>
-  <div *ngIf="currentUser.id" class="edit-form">
+  <div *ngIf="currentUser.id && ((appusername == currentUser.username ) || showModUser)" class="edit-form">
     <h4>User</h4>
     <form>
       <div class="form-group">
@@ -92,7 +92,7 @@
       Publish
     </button>
 
-    <button class="badge badge-danger mr-2" (click)="deleteUser()">
+    <button *ngIf="showModUser" class="badge badge-danger mr-2" (click)="deleteUser()">
       Delete
     </button>
 

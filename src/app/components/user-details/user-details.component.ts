@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { OrgService } from 'src/app/services/org.service';
 import { Org } from '../../models/org.model';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-user-details',
@@ -12,23 +13,54 @@ import { Org } from '../../models/org.model';
 })
 export class UserDetailsComponent implements OnInit {
   currentUser: User = {
+    username: '',
     title: '',
     description: '',
     published: false
   };
   org: Org[] = [];
   message = '';
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showModUser = false;
+  showModButtons = false;
+  appusername?: string;
+
+
 
   constructor(
     private userService: UserService,
     private orgService: OrgService,
+    private tokenStorageService: TokenStorageService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const appuser = this.tokenStorageService.getAppuser();
+      this.getUser(this.route.snapshot.params.id);
+      this.roles = appuser.roles;
+      this.showModUser = this.roles.includes('ROLE_ADMIN');
+      this.appusername = appuser.username;
+      /* The stement below will not work because it is an asyncrhonous call
+      if (this.appusername == this.currentUser.username)
+      {
+        this.showModButtons = true;
+      }
+      console.log('currentUser.id='+this.currentUser.id);
+      console.log('appuser='+JSON.stringify(appuser));
+      console.log('currentUser='+JSON.stringify(this.currentUser));
+      console.log('this.appusername='+this.appusername);
+      console.log('this.currentUser.username='+this.currentUser.username);
+      console.log('showModUser='+this.showModUser);
+      console.log('showModButtons='+this.showModButtons);
+      */
+      this.retrieveOrgs();
+    }
     this.message = '';
     this.retrieveOrgs();
-    this.getUser(this.route.snapshot.params.id);
   }
 
   getUser(id: string): void {
@@ -36,7 +68,7 @@ export class UserDetailsComponent implements OnInit {
       .subscribe(
         data => {
           this.currentUser = data;
-          console.log(data);
+          console.log("getUser for "+id+"="+JSON.stringify(data));
         },
         error => {
           console.log(error);

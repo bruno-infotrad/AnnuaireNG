@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="showAddOrg; else elseBlock">
   <div class="submit-form">
     <div *ngIf="!submitted">
       <div class="form-group">
@@ -45,3 +45,4 @@
     </div>
   </div>
 </div>
+<ng-template #elseBlock>Login as admin first</ng-template>

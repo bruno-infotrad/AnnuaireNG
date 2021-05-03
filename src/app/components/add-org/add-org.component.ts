@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Org } from 'src/app/models/org.model';
 import { OrgService } from 'src/app/services/org.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-add-org',
@@ -14,10 +15,23 @@ export class AddOrgComponent implements OnInit {
     description: '',
   };
   submitted = false;
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAddOrg = false;
+  username?: string;
 
-  constructor(private orgService: OrgService) { }
+
+  constructor(private orgService: OrgService,private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const appuser = this.tokenStorageService.getAppuser();
+      this.roles = appuser.roles;
+      this.showAddOrg = this.roles.includes('ROLE_ADMIN');
+      this.username = appuser.username;
+    }
   }
 
   saveOrg(): void {

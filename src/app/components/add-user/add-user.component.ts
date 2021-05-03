@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { OrgService } from 'src/app/services/org.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { Org } from '../../models/org.model';
 
 @Component({
@@ -20,11 +21,25 @@ export class AddUserComponent implements OnInit {
   };
   org: Org[] = [];
   submitted = false;
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAddUser = false;
+  username?: string;
 
-  constructor(private userService: UserService, private orgService: OrgService) { }
+
+  constructor(private userService: UserService, private orgService: OrgService,private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-  this.retrieveOrgs();
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const appuser = this.tokenStorageService.getAppuser();
+      this.roles = appuser.roles;
+      this.showAddUser = this.roles.includes('ROLE_ADMIN');
+      this.username = appuser.username;
+      this.retrieveOrgs();
+    }
+
   }
 
   saveUser(): void {

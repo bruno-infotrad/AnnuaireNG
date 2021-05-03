@@ -31,7 +31,7 @@
       </li>
     </ul>
 
-    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
+    <button *ngIf="showEdit" class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
       Remove All Users
     </button>
   </div>
@@ -65,10 +65,9 @@
         {{ currentUser.published ? "Published" : "Pending" }}
       </div>
 
-      <a class="badge badge-warning" routerLink="/users/{{ currentUser.id }}">
+      <a *ngIf="currentUser.username == appusername || showEdit" class="badge badge-warning" routerLink="/users/{{ currentUser.id }}">
         Edit
       </a>
-    </div>
 
     <div *ngIf="!currentUser">
       <br />
