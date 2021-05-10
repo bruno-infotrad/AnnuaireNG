@@ -44,7 +44,7 @@ export class UserDetailsComponent implements OnInit {
       this.roles = appuser.roles;
       this.showModUser = this.roles.includes('ROLE_ADMIN');
       this.appusername = appuser.username;
-      /* The stement below will not work because it is an asyncrhonous call
+      /* The statement below will not work because it is an asynchronous call
       if (this.appusername == this.currentUser.username)
       {
         this.showModButtons = true;
