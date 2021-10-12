@@ -6,5 +6,5 @@ export class User {
   title?: string;
   description?: string;
   organization?: number;
-  published?: boolean;
+  image?: any;
 }

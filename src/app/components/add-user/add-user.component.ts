@@ -17,7 +17,7 @@ export class AddUserComponent implements OnInit {
     lastname: '',
     title: '',
     description: '',
-    published: false
+    image: ''
   };
   org: Org[] = [];
   submitted = false;
@@ -71,7 +71,7 @@ export class AddUserComponent implements OnInit {
       lastname: '',
       title: '',
       description: '',
-      published: false
+      image: ''
     };
   }
 

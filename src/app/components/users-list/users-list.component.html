@@ -60,10 +60,6 @@
         <label><strong>Organization:</strong></label>
         {{ org[currentUser.organization-1].orgid }}
       </div>
-      <div>
-        <label><strong>Status:</strong></label>
-        {{ currentUser.published ? "Published" : "Pending" }}
-      </div>
 
       <a *ngIf="currentUser.username == appusername || showEdit" class="badge badge-warning" routerLink="/users/{{ currentUser.id }}">
         Edit

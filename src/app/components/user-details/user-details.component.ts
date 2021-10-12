@@ -16,7 +16,7 @@ export class UserDetailsComponent implements OnInit {
     username: '',
     title: '',
     description: '',
-    published: false
+    image: '' 
   };
   org: Org[] = [];
   message = '';
@@ -25,6 +25,7 @@ export class UserDetailsComponent implements OnInit {
   showModUser = false;
   showModButtons = false;
   appusername?: string;
+  b64 = '';
 
 
 
@@ -69,31 +70,6 @@ export class UserDetailsComponent implements OnInit {
         data => {
           this.currentUser = data;
           console.log("getUser for "+id+"="+JSON.stringify(data));
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
-  updatePublished(status: boolean): void {
-    const data = {
-      username: this.currentUser.username,
-      firstname: this.currentUser.firstname,
-      lastname: this.currentUser.lastname,
-      title: this.currentUser.title,
-      description: this.currentUser.description,
-      organization: this.currentUser.organization,
-      published: status
-    };
-
-    this.message = '';
-
-    this.userService.update(this.currentUser.id, data)
-      .subscribe(
-        response => {
-          this.currentUser.published = status;
-          console.log(response);
-          this.message = response.message ? response.message : 'This user was updated successfully!';
         },
         error => {
           console.log(error);
