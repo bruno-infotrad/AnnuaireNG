@@ -24,6 +24,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatMenuModule } from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -53,6 +59,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatIconModule,
     MatProgressBarModule,
+    MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatMenuModule,
     BrowserAnimationsModule,
   ],
   providers: [authInterceptorProviders],
