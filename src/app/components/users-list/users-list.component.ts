@@ -13,6 +13,7 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 export class UsersListComponent implements OnInit {
   user?: User[];
   org: Org[] = [];
+  selectedOrg?: Org; 
   currentUser?: User;
   currentIndex = -1;
   username = '';
@@ -57,6 +58,10 @@ export class UsersListComponent implements OnInit {
   setActiveUser(user: User, index: number): void {
     this.currentUser = user;
     this.currentIndex = index;
+    if (this.currentUser)
+    {
+      this.selectedOrg = this.org.find(x => x.id === this.currentUser?.organization);
+    }
   }
 
   removeAllUsers(): void {

@@ -3,13 +3,19 @@
     <img src="/assets/infotrad-petit.jpg" alt="Info-TRAD" class="navbar-brand" />
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item" *ngIf="isLoggedIn">
-        <a i18n="@@home" href="/users" class="nav-link" routerLink="users">Home </a>
+        <a i18n="@@search-users" href="/users" class="nav-link" routerLink="users">Search users</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a i18n="@@search-organizations" href="/orgs" class="nav-link" routerLink="orgs">Search organizations</a>
       </li>
       <li class="nav-item" *ngIf="!isLoggedIn">
         <a i18n="@@home" href="/home" class="nav-link" routerLink="home">Home </a>
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
-        <a i18n="@@admin_screen" href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+        <a i18n="@@add-user" href="/adduser" class="nav-link" routerLink="adduser">Add user</a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a i18n="@@add-organization" href="/addorg" class="nav-link" routerLink="addorg">Add organization</a>
       </li>
       <li class="nav-item" *ngIf="showModeratorBoard">
         <a i18n="@@moderator_screen" href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
@@ -27,10 +33,10 @@
 
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
       <li class="nav-item">
-        <a i18n="@@profile" href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
       </li>
       <li class="nav-item">
-        <a i18n="@@logout" href class="nav-link" (click)="logout()">LogOut</a>
+        <a i18n="@@logout" href class="nav-link" (click)="logout()">Logout</a>
       </li>
     </ul>
     <ng-container>

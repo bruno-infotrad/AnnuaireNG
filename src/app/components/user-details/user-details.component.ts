@@ -61,7 +61,6 @@ export class UserDetailsComponent implements OnInit {
       this.retrieveOrgs();
     }
     this.message = '';
-    this.retrieveOrgs();
   }
 
   getUser(id: string): void {

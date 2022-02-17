@@ -1,25 +1,25 @@
 <div class="list row">
   <div class="col-md-8">
     <div class="input-group mb-3">
-      <input
+      <input i18n-placeholder="@@search-users"
         type="text"
         class="form-control"
         placeholder="Search by username"
         [(ngModel)]="username"
       />
       <div class="input-group-append">
-        <button
+        <button i18n="@@search"
           class="btn btn-outline-secondary"
           type="button"
           (click)="searchUsername()"
         >
-          Search
+Search
         </button>
       </div>
     </div>
   </div>
   <div class="col-md-6">
-    <h4>User List</h4>
+    <h4 i18n="@@user-list">User List</h4>
     <ul class="list-group">
       <li
         class="list-group-item"
@@ -31,43 +31,43 @@
       </li>
     </ul>
 
-    <button *ngIf="showEdit" class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
+    <button i18n="@@remove-all-users" *ngIf="showEdit" class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
       Remove All Users
     </button>
   </div>
   <div class="col-md-6">
     <div *ngIf="currentUser">
-      <h4>User</h4>
+      <h4 i18n-placeholder="@@user">User</h4>
       <div>
-        <label><strong>User Name:</strong></label> {{ currentUser.username }}
+        <strong><label i18n="@@username">User Name:</label></strong> {{ currentUser.username }}
       </div>
       <div>
-        <label><strong>First Name:</strong></label> {{ currentUser.firstname }}
+        <strong><label i18n="@@firstname">First Name:</label></strong> {{ currentUser.firstname }}
       </div>
       <div>
-        <label><strong>Last Name:</strong></label> {{ currentUser.lastname }}
+        <strong><label i18n="@@lastname">Last Name:</label></strong> {{ currentUser.lastname }}
       </div>
       <div>
-        <label><strong>Title:</strong></label> {{ currentUser.title }}
+        <strong><label i18n="@@title">Title:</label></strong> {{ currentUser.title }}
       </div>
       <div>
-        <label><strong>Description:</strong></label>
+        <strong><label i18n="@@description">Description:</label></strong>
         {{ currentUser.description }}
       </div>
       <div *ngIf="currentUser.organization">
-        <label><strong>Organization ID:</strong></label>
+        <strong><label i18n="@@organization-db-id">Organization DB ID:</label></strong>
         {{ currentUser.organization}}
-        <label><strong>Organization:</strong></label>
-        {{ org[currentUser.organization-1].orgid }}
+        <strong><label i18n="@@organization">Organization:</label></strong>
+        {{ selectedOrg?.orgid }}
       </div>
 
-      <a *ngIf="currentUser.username == appusername || showEdit" class="badge badge-warning" routerLink="/users/{{ currentUser.id }}">
+      <a i18n="@@edit" *ngIf="currentUser.username == appusername || showEdit" class="badge badge-warning" routerLink="/users/{{ currentUser.id }}">
         Edit
       </a>
 
     <div *ngIf="!currentUser">
       <br />
-      <p>Please click on a User...</p>
+      <p i18n="@@select-user">Click on a user for details</p>
     </div>
   </div>
 </div>

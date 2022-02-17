@@ -3,12 +3,13 @@
 }
 
 .file-upload {
+float: right;
 display: flex;
   align-items: flex-end;
 }
 
 .upload-btn {
-  margin-left: 10px;
+  margin-right: 80px;
   margin-bottom:15px;
 }
 
