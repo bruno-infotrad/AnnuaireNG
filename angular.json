@@ -169,8 +169,8 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "NTI:build:development",
-              "serverTarget": "NTI:server:development"
+              "browserTarget": "NTI:build",
+              "serverTarget": "NTI:server"
             },
             "production": {
               "browserTarget": "NTI:build:production",
