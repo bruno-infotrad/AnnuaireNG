@@ -17,14 +17,16 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  return: string = '';
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
+  constructor(private authService: AuthService, private tokenStorageService: TokenStorageService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
+    this.route.queryParams.subscribe(params => this.return = params['return'] || '/users');
+    if (this.tokenStorageService.getToken()) {
       this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getAppuser().roles;
-      this.router.navigate(['users']);
+      this.roles = this.tokenStorageService.getAppuser().roles;
+      this.router.navigate([this.return]);
     }
   }
 
@@ -33,12 +35,12 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(username, password).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveAppuser(data);
+        this.tokenStorageService.saveToken(data.accessToken);
+        this.tokenStorageService.saveAppuser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getAppuser().roles;
+        this.roles = this.tokenStorageService.getAppuser().roles;
         this.reloadPage();
       },
       err => {

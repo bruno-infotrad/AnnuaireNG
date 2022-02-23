@@ -8,10 +8,21 @@ import { TokenStorageService } from '../../services/token-storage.service';
 })
 export class ProfileComponent implements OnInit {
   currentUser: any;
+  isLoggedIn = false;
+  private roles: string[] = [];
+  showEdit = false;
+  appusername?: string;
 
-  constructor(private token: TokenStorageService) { }
+  constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.currentUser = this.token.getAppuser();
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const appuser = this.tokenStorageService.getAppuser();
+      this.roles = appuser.roles;
+      this.showEdit = this.roles.includes('ROLE_ADMIN');
+      this.appusername = appuser.username;
+    }
   }
 }

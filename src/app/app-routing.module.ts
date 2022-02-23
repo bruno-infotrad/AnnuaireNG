@@ -15,28 +15,28 @@ import { BoardUserComponent } from './components/board-user/board-user.component
 import { BoardModeratorComponent } from './components/board-moderator/board-moderator.component';
 import { BoardAdminComponent } from './components/board-admin/board-admin.component';
 
+import { AuthGuard } from './auth/auth.guard';
+
 const routes: Routes = [
-  { path: 'users', component: UsersListComponent },
-  { path: 'users/:id', component: UserDetailsComponent },
-  { path: 'adduser', component: AddUserComponent },
-  { path: 'orgs', component: OrgsListComponent },
-  { path: 'orgs/:id', component: OrgDetailsComponent },
-  { path: 'addorg', component: AddOrgComponent },
+  { path: 'users', component: UsersListComponent, canActivate: [AuthGuard] },
+  { path: 'users/:id', component: UserDetailsComponent, canActivate: [AuthGuard]  },
+  { path: 'adduser', component: AddUserComponent, canActivate: [AuthGuard]  },
+  { path: 'orgs', component: OrgsListComponent, canActivate: [AuthGuard]  },
+  { path: 'orgs/:id', component: OrgDetailsComponent, canActivate: [AuthGuard]  },
+  { path: 'addorg', component: AddOrgComponent, canActivate: [AuthGuard]  },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'user', component: BoardUserComponent },
-  { path: 'mod', component: BoardModeratorComponent },
-  { path: 'admin', component: BoardAdminComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]  },
+  //{ path: 'user', component: BoardUserComponent },
+  //{ path: 'mod', component: BoardModeratorComponent },
+  //{ path: 'admin', component: BoardAdminComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
-  //imports: [RouterModule.forRoot(routes, {useHash: true})],
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  //imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
