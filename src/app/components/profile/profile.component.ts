@@ -19,10 +19,10 @@ export class ProfileComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
-      const appuser = this.tokenStorageService.getAppuser();
-      this.roles = appuser.roles;
-      this.showEdit = this.roles.includes('ROLE_ADMIN');
-      this.appusername = appuser.username;
+      this.currentUser = this.tokenStorageService.getAppuser();
+      //this.roles = appuser.roles;
+      this.showEdit = this.currentUser.roles.includes('ROLE_ADMIN');
+      //this.appusername = appuser.username;
     }
   }
 }
